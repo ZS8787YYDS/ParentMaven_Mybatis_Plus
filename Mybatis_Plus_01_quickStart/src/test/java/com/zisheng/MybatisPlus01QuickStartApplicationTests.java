@@ -23,7 +23,7 @@ class MybatisPlus01QuickStartApplicationTests {
     @Autowired
     private DemoMapper demoMapper;
     @Test
-    public void test01() throws DocumentException {
+    public void testParseXML() throws DocumentException {
         log.info("解析XML文件");
         SAXReader saxReader = new SAXReader();
         Document document = saxReader.read(this.getClass().getClassLoader().getResource("test.xml"));
@@ -40,24 +40,52 @@ class MybatisPlus01QuickStartApplicationTests {
         }
     }
     @Test
-    public void searchByIdTest()
+    public void testUpdateById_02()
     {
-        User user = testMapper.selectById(4);
-        log.info("查询到的结果为：{}",user);
+//        List<User> users = testMapper.selectList(null);
+//        List<User> users = demoMapper.selectList(null);
+//
+//        users.forEach(System.out::println);
+        User user = new User(1,"撒", (byte) 1, (short) 12);
+        System.out.println(demoMapper.updateById(user));
     }
-//    @Test
-//    public void testSearchById() throws  Exception
-//    {
-////        List<User> users = testMapper.selectList(null);
-////        List<User> users = demoMapper.selectList(null);
-////
-////        users.forEach(System.out::println);
-//        User user = new User(1,"撒", (byte) 1, (short) 12);
-//        System.out.println(demoMapper.updateById(user));
-//    }
-//    @Test
-//    public void testSearchById() {
-//        User user = demoMapper.selectById(1);
-//        System.out.println(user);
-//    }
+    @Test
+    public void testSelectById() {
+        User user = testMapper.selectById(1);
+        System.out.println(user);
+    }
+    @Test
+    public void testSelectList()
+    {
+        List<User> users = testMapper.selectList(null);
+        log.info("查询的结果如下");
+        users.forEach(System.out::println);
+    }
+    @Test
+    public void testSelectCount()
+    {
+        Long count = testMapper.selectCount(null);
+        log.info("表中的数据个数：{}",count);
+    }
+    @Test
+    public void testSelect()
+    {
+    }
+    @Test
+    public void testInsert()
+    {
+//        int ans = testMapper.insert(new User(5, "张无忌", (byte) 2, (short) 22));
+        User user = new User();
+        user.setName("周芷若");
+        user.setGender((byte) 2);
+        user.setAge((short) 18);
+        int ans = testMapper.insert(user);
+        log.info("返回的结果为：{}",ans);
+    }
+    @Test
+    public void testDeleteById()
+    {
+        int n = testMapper.deleteById(7);
+        log.info("n:[}",n);
+    }
 }

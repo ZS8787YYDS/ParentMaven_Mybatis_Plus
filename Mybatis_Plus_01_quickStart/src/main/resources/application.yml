@@ -1,25 +1,35 @@
 spring:
 # 数据库连接信息,
   datasource:
+    # 数据库连接的驱动类的全类名
     driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库连接的url地址
     url: jdbc:mysql://localhost:3306/mybatis_plus
+    # 数据库连接的用户名
     username: root
+    # 数据库连接的密码
     password: 8787521
+    # 数据库连接池，负责管理分配数据库的连接
     type: com.alibaba.druid.pool.DruidDataSource
 #单次文件上传大小及其请求大小
   servlet:
     multipart:
+      # 规定单次请求文件上传的最大大小
       max-request-size: 1GB
+      # 规定单次上传文件最大为100MB
       max-file-size: 100MB
 # Mybatis的日志记录开关及其驼峰命名开关
 mybatis:
   configuration:
+    # mybatis日志记录开关，负责记录日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # mybatis驼峰命名开关，会将SQL语句返回的字段转换为驼峰的形式封装到对象的属性中
     map-underscore-to-camel-case: true
 # Spring事务管理日志开关
 logging:
   level:
     org.springframework.jdbc.support.JdbcTransactionManager: debug
+# 配置数据库连接的第二种形式，以上是第一种方式，两种方式选其一即可。
 #spring:
 #  datasource:
 #    druid:
