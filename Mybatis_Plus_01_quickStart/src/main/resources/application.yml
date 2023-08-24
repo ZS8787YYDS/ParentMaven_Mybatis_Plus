@@ -1,21 +1,29 @@
 spring:
-  # 数据库连接信息
+# 数据库连接信息,
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mybatis_plus
     username: root
     password: 8787521
-    # 单次文件上传大小及其请求大小
+    type: com.alibaba.druid.pool.DruidDataSource
+#单次文件上传大小及其请求大小
   servlet:
     multipart:
       max-request-size: 1GB
       max-file-size: 100MB
-      # Mybatis的日志记录开关及其驼峰命名开关
+# Mybatis的日志记录开关及其驼峰命名开关
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
-    # Spring事务管理日志开关
+# Spring事务管理日志开关
 logging:
   level:
     org.springframework.jdbc.support.JdbcTransactionManager: debug
+#spring:
+#  datasource:
+#    druid:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      username: root
+#      password: 8787521
+#      url: jdbc:mysql://localhost:3306\mybatis_plus

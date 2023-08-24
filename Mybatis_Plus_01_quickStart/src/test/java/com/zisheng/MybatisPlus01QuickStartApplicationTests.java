@@ -36,11 +36,17 @@ class MybatisPlus01QuickStartApplicationTests {
             System.out.println("age-->" + age);
         }
     }
+//    @Test
+//    public void searchByIdTest()
+//    {
+//        User user = testMapper.searchById(1);
+//        log.info("查询到的结果为：{}",user);
+//    }
     @Test
-    public void searchByIdTest()
+    public void testSearchById() throws  Exception
     {
-        User user = testMapper.searchById(1);
-        log.info("查询到的结果为：{}",user);
+//        List<User> users = testMapper.selectList(null);
+        List<User> users = testMapper.selectList(null);
+        users.forEach(System.out::println);
     }
-
 }

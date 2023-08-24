@@ -13,15 +13,11 @@
     </parent>
     <!--将打包方式设置为pom，表示本maven模块不写代码，只负责管理依赖-->
     <packaging>pom</packaging>
+    <!--设置聚合的模块，最后可以一键进行打包操作-->
     <modules>
         <module>Pojo</module>
+        <module>Mybatis_Plus_01_quickStart</module>
     </modules>
-    <!--设置聚合的模块，最后可以一键进行打包操作-->
-<!--    <modules>-->
-<!--        <module>Pojo</module>-->
-<!--        <module>Test_SpringBoot_Mybatis_Plus</module>-->
-<!--        <module>untitled</module>-->
-<!--    </modules>-->
     <groupId>com.zisheng</groupId>
     <artifactId>Test_mybatis_plus_start</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -35,6 +31,12 @@
     <!--统一管理依赖的版本，子工程仍然需要引入依赖，但是不需要引入版本-->
     <dependencyManagement>
         <dependencies>
+            <!--德鲁伊数据库连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.2.8</version>
+            </dependency>
             <!--MybatisPlus的起步依赖-->
             <dependency>
                 <groupId>com.baomidou</groupId>
