@@ -1,5 +1,6 @@
 package com.zisheng;
 
+import com.zisheng.Mapper.DemoMapper;
 import com.zisheng.Mapper.TestMapper;
 import com.zisheng.Pojo.User;
 import org.dom4j.Document;
@@ -19,6 +20,8 @@ class MybatisPlus01QuickStartApplicationTests {
     private static final Logger log = LoggerFactory.getLogger(MybatisPlus01QuickStartApplicationTests.class);
     @Autowired
     private TestMapper testMapper;
+    @Autowired
+    private DemoMapper demoMapper;
     @Test
     public void test01() throws DocumentException {
         log.info("解析XML文件");
@@ -36,17 +39,25 @@ class MybatisPlus01QuickStartApplicationTests {
             System.out.println("age-->" + age);
         }
     }
-//    @Test
-//    public void searchByIdTest()
-//    {
-//        User user = testMapper.searchById(1);
-//        log.info("查询到的结果为：{}",user);
-//    }
     @Test
-    public void testSearchById() throws  Exception
+    public void searchByIdTest()
     {
-//        List<User> users = testMapper.selectList(null);
-        List<User> users = testMapper.selectList(null);
-        users.forEach(System.out::println);
+        User user = testMapper.selectById(4);
+        log.info("查询到的结果为：{}",user);
     }
+//    @Test
+//    public void testSearchById() throws  Exception
+//    {
+////        List<User> users = testMapper.selectList(null);
+////        List<User> users = demoMapper.selectList(null);
+////
+////        users.forEach(System.out::println);
+//        User user = new User(1,"撒", (byte) 1, (short) 12);
+//        System.out.println(demoMapper.updateById(user));
+//    }
+//    @Test
+//    public void testSearchById() {
+//        User user = demoMapper.selectById(1);
+//        System.out.println(user);
+//    }
 }

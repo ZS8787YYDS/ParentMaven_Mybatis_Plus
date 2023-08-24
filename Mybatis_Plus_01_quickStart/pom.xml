@@ -18,9 +18,14 @@
     </properties>
     <dependencies>
         <!--德鲁伊数据库连接池-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>druid-spring-boot-starter</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
+            <artifactId>druid</artifactId>
+            <version>1.2.8</version>
         </dependency>
         <!--解析XML相关依赖-->
         <dependency>

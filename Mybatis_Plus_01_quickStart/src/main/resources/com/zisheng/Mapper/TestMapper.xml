@@ -6,7 +6,7 @@
     <sql id="searchById">
         select * from user_table
     </sql>
-    <select id="searchById" resultType="com.zisheng.Pojo.User">
+    <select id="selectById" resultType="com.zisheng.Pojo.User">
         <include refid="searchById"></include> where id = #{id};
     </select>
 </mapper>
