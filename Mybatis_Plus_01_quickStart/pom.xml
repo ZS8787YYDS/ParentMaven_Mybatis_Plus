@@ -6,7 +6,7 @@
             <groupId>com.zisheng</groupId>
             <artifactId>Test_mybatis_plus_start</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <relativePath></relativePath>
+            <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.zisheng</groupId>
     <artifactId>Mybatis_Plus_01_quickStart</artifactId>
