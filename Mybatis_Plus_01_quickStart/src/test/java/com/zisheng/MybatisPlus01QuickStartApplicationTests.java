@@ -16,12 +16,14 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.junit.jupiter.api.Test;
+import org.objectweb.asm.Handle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class MybatisPlus01QuickStartApplicationTests {
@@ -116,23 +118,88 @@ class MybatisPlus01QuickStartApplicationTests {
         /**
          * null值的判定
          */
-        // 创建LambdaQueryWrapper类型的对象，同时指定泛型的类型为实体类的类型
-        LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
-        // 创建一个对象，这个类继承实体类，同时新增了一个年龄属性，用于设置年龄的上限和下限
-        HandleNull handleNull  = new HandleNull();
-        handleNull.setAge((short) 10);
-        handleNull.setAgeUp(null);
-        // 以下方法就是当Condition条件不为空的时候，才会设置查询条件（为表中的某个字段设置条件，这个
-        // 字段根据实体类的属性来定位，因为实体类上已经加上了tableName注解，与数据库中的表表是一 一对应的
-        // ）
-        // 调用gt方法，gt表示大于号
-        lqw.gt(handleNull.getAge() != null, User::getAge,handleNull.getAge());
-        // lt方法设置查询条件，表示小于号
-        lqw.lt(handleNull.getAgeUp() != null,User::getAge,handleNull.getAgeUp());
-        // 将LambdaQueryWrapper类型的对象传递给selectList方法，进行条件查询
-        List<User> users = testMapper.selectList(lqw);
-        users.forEach(System.out::println);
-
+//        // 创建LambdaQueryWrapper类型的对象，同时指定泛型的类型为实体类的类型
+//        LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
+//        // 创建一个对象，这个类继承实体类，同时新增了一个年龄属性，用于设置年龄的上限和下限
+//        HandleNull handleNull  = new HandleNull();
+//        handleNull.setAge((short) 10);
+//        handleNull.setAgeUp(null);
+//        // 以下方法就是当Condition条件不为空的时候，才会设置查询条件（为表中的某个字段设置条件，这个
+//        // 字段根据实体类的属性来定位，因为实体类上已经加上了tableName注解，与数据库中的表表是一 一对应的
+//        // ）
+//        // 调用gt方法，gt表示大于号
+//        lqw.gt(handleNull.getAge() != null, User::getAge,handleNull.getAge());
+//        // lt方法设置查询条件，表示小于号
+//        lqw.lt(handleNull.getAgeUp() != null,User::getAge,handleNull.getAgeUp());
+//        // 将LambdaQueryWrapper类型的对象传递给selectList方法，进行条件查询
+//        List<User> users = testMapper.selectList(lqw);
+//        users.forEach(System.out::println);
+        /**
+         * 查询投影
+         */
+        /* Lambda格式进行指定查询出哪些字段,原理是根据属性名定位表中的字段*/
+        // 创建对象，用于设置查询条件及其返回字段等等
+//        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+//        // 设置返回的字段为实体类属性对应的字段
+//        lambdaQueryWrapper.select(User::getId,User::getName);
+//        // 调用selectList方法进行查询，将查询的结果封装在数组中返回
+//        List<User> users = testMapper.selectList(lambdaQueryWrapper);
+//        // 调用集合的stream方法获得集合的stream流，调用中间方法进行处理，最后通过调用终结方法结束
+//        users.forEach(System.out::println);
+        /* 普通格式进行指定查询出哪些字段，直接通过字段名进行设置*/
+//        QueryWrapper<User> qw = new QueryWrapper<>();
+        // 直接通过字段名称设置查询返回的字段
+//        qw.select("id","name");
+//        List<User> users = testMapper.selectList(qw);
+//        users.forEach(System.out::println);
+        // 设置返回的字段为表中数据的个数,同时指定字段的别名
+//        qw.select("count(*) as count");
+//        List<Map<String,Object>> count = testMapper.selectMaps(qw);
+        // forEach遍历
+//        count.forEach(System.out::println);
+        // 增强for循环进行遍历
+//        for(Map<String,Object> element : count)
+//        {
+//            element.forEach((k,v) -> System.out.println(k + "-->" + v));
+//        }
+        /**
+         * 分组查询
+         */
+/*        // 首先创建QueryWrapper对象
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        // 调用对象的select方法设置查询返回的字段
+        queryWrapper.select("age","count(*) as count");
+        // 调用对象的groupBy方法设置分组条件，即按照哪个字段进行分组
+        queryWrapper.groupBy("age");
+        // 调用BaseMapper的selectMaps方法按照条件查询所有元素，将返回值封装到List集合当中，
+        // 集合中的每个元素都是一个Map集合，
+        List<Map<String, Object>> maps = testMapper.selectMaps(queryWrapper);
+        maps.forEach(System.out::println);*/
+        /**
+         * 各种各样的条件
+         */
+        /* 等于条件：下面来模拟一个登录功能*/
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("name","张无忌").eq("age",22);
+//        // 调用baseMapper接口的selectOne方法，返回值是单个，如果查不到数据的话，值为null
+//        User user = testMapper.selectOne(queryWrapper);
+//        System.out.println(user);
+        /*区间匹配，lt：小于 le：小于等于 gt：大于 ge：大于等于 between：一个区间，*/
+//        LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
+//        HandleNull handleNull = new HandleNull();
+//        handleNull.setAge((short) 10);
+//        handleNull.setAgeUp((short) 12);
+//        lqw.between(handleNull.getAgeUp() != null && handleNull.getAge() != null,User::getAge,handleNull.getAge(), handleNull.getAgeUp());
+//        List<User> users = testMapper.selectList(lqw);
+//        users.forEach(System.out::println);
+        /*模糊匹配*/
+        LambdaQueryWrapper<User> lambdaQueryWrapper  = new LambdaQueryWrapper<>();
+        HandleNull handleNull = new HandleNull();
+        handleNull.setName("张");
+//        // like方法默认是两边都带%，likeLeft方法是默认%在左边，likeRight方法默认%号在右边
+        lambdaQueryWrapper.likeRight(handleNull.getName() != null, User::getName,handleNull.getName());
+        List<User> users = testMapper.selectList(lambdaQueryWrapper);
+        users.forEach(LambdaMethodQuote::getAge);
     }
     /**
      * 查询所有表中元素个数代码
