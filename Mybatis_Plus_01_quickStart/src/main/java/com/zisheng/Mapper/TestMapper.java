@@ -3,6 +3,7 @@ package com.zisheng.Mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zisheng.Pojo.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ import java.util.List;
  */
 @Mapper
 public interface TestMapper extends BaseMapper<User> {
+    @Select("select * from user_table")
+    List<User> PageSelect();
 }

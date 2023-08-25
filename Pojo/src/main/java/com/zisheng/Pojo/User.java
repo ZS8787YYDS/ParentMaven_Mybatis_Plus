@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Lombok的相关注解，负责简化实体类书写，可以自动提供get set方法 toString方法 hashCode方法 以及
+ * Lombok的相关注解，负责简化实体类书写，并且可以自动提供get set方法 toString方法 equals方法 hashCode方法 以及
  * 有参 无参构造器
  */
 @Data

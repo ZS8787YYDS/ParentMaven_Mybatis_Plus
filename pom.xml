@@ -28,6 +28,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!--PageHelper插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.4.2</version>
+        </dependency>
         <!--MybatisPlus的起步依赖-->
         <dependency>
             <groupId>com.baomidou</groupId>
