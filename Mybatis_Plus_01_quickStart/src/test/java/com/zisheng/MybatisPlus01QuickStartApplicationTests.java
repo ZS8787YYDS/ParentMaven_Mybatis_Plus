@@ -1,11 +1,16 @@
 package com.zisheng;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
+import com.zisheng.Lambda.LambdaMethodQuote;
 import com.zisheng.Mapper.DemoMapper;
 import com.zisheng.Mapper.TestMapper;
 import com.zisheng.Pojo.User;
+import com.zisheng.QueryCondition.HandleNull;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -72,16 +77,63 @@ class MybatisPlus01QuickStartApplicationTests {
     }
 
     /**
-     * 查询所有信息功能测试代码
+     * 按条件查询所有信息功能测试代码,
      */
     @Test
     public void testSelectList()
     {
-        List<User> users = testMapper.selectList(null);
-        log.info("查询的结果如下");
+        /** 条件查询的第一种方式，这种方式设置查询条件的时候写的是字段的名称，很容易去写错，
+         *  一般采用lambda表达式的形式设置查询条件
+         */
+        // 由于selectList方法的参数是Wrapper(抽象类)类型的对象，因此创建它的实现类对象
+        // 同时指定泛型,泛型的类型就是实体类的类型
+//        QueryWrapper<User>  wrapper = new QueryWrapper<>();
+//        // 调用对象的方法设置查询条件,第一个参数是字段的名称，第二个参数是值
+//        wrapper.lt("age",15);
+//        List<User> users = testMapper.selectList(wrapper);
+//        log.info("查询的结果如下");
+//        users.forEach(System.out::println);
+        /**
+         * 条件查询的第二种方式：Lambda表达式的形式.这种方式必须指定泛型哈.
+         * 采用lambda表达式进行书写可以避免写错表中字段的值
+         */
+//        QueryWrapper<User> qw = new QueryWrapper<>();
+//        qw.lambda().lt(User::getAge,15);
+//        List<User> users = testMapper.selectList(qw);
+//        users.forEach(LambdaMethodQuote::getAge);
+        /**
+         * 条件查询的第三种方式
+         * lambda表达式的方式,采用专用的LambdaQueryWrapper对象
+         */
+//        LambdaQueryWrapper<User> lwq = new LambdaQueryWrapper<>();
+//        // 支持链式编程
+//        // 设置查询条件为年龄大于20且小于23
+////        lwq.lt(User::getAge,23).gt(User::getAge,20);
+//        // 设置查询条件为年龄小于12或者大于20。or()方法表示或的关系，直接设置的话是且的关系
+//        lwq.lt(User::getAge,12).or().gt(User::getAge,20);
+//        List<User> users = testMapper.selectList(lwq);
+//        users.forEach(System.out::println);
+        /**
+         * null值的判定
+         */
+        // 创建LambdaQueryWrapper类型的对象，同时指定泛型的类型为实体类的类型
+        LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
+        // 创建一个对象，这个类继承实体类，同时新增了一个年龄属性，用于设置年龄的上限和下限
+        HandleNull handleNull  = new HandleNull();
+        handleNull.setAge((short) 10);
+        handleNull.setAgeUp(null);
+        // 以下方法就是当Condition条件不为空的时候，才会设置查询条件（为表中的某个字段设置条件，这个
+        // 字段根据实体类的属性来定位，因为实体类上已经加上了tableName注解，与数据库中的表表是一 一对应的
+        // ）
+        // 调用gt方法，gt表示大于号
+        lqw.gt(handleNull.getAge() != null, User::getAge,handleNull.getAge());
+        // lt方法设置查询条件，表示小于号
+        lqw.lt(handleNull.getAgeUp() != null,User::getAge,handleNull.getAgeUp());
+        // 将LambdaQueryWrapper类型的对象传递给selectList方法，进行条件查询
+        List<User> users = testMapper.selectList(lqw);
         users.forEach(System.out::println);
-    }
 
+    }
     /**
      * 查询所有表中元素个数代码
      */

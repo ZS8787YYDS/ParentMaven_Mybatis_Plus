@@ -18,11 +18,19 @@ spring:
       max-request-size: 1GB
       # 规定单次上传文件最大为100MB
       max-file-size: 100MB
+  # 关闭控制台输出的图形等等日志，
+  main:
+    banner-mode: off
 # MybatisPlus的日志记录开关
 mybatis-plus:
   configuration:
+    # Mybatis_plus的日志记录开关
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # mybatis_plus的驼峰命名开关
     map-underscore-to-camel-case: true
+  # 可以使得控制台输出的信息更加清爽一点，把显示的图形等等给删除，即不显示
+  global-config:
+    banner: false
 ## Mybatis的日志记录开关及其驼峰命名开关
 #mybatis:
 #  configuration:

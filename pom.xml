@@ -38,7 +38,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.2</version>
+            <version>3.5.3.1</version>
         </dependency>
     </dependencies>
     <!--统一管理依赖的版本，子工程仍然需要引入依赖，但是不需要引入版本-->
