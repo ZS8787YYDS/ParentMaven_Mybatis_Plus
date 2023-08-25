@@ -1,6 +1,8 @@
 package com.zisheng.Pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,10 +21,19 @@ import lombok.NoArgsConstructor;
  */
 @TableName("user_table")
 public class User {
-    private Integer id;
-    private String name;
+    /*设置主键生成策略*/
     /**
-     * 通过value属性可以设置实体类的属性对应表中的哪个字段
+     * NONE: 无自动生成策略，即需要自己输入
+     * Auto：使用数据库ID自动生成策略控制ID生成
+     * Input：需要自己进行输入
+     * ASSIGN_ID：利用雪花算法生成id，是一个64位的字符串，要采用Long类型进行存储
+     * ASSIGN_UUID: 由UUID生成算法作为id的生成策略
+     */
+//    @TableId(type = IdType.ASSIGN_ID)
+    private Long id;
+    private String name;
+    /**user_table
+     * 通过TableField注解的value属性可以设置实体类的属性对应表中的哪个字段
      * 通过select属性可以设置当前这个属性是否参与查询，true表示参与，false表示不参与
      * 通过exist属性可以设置当前这个属性在数据库表当中是否存在，false表示不存在，true表示存在
      */

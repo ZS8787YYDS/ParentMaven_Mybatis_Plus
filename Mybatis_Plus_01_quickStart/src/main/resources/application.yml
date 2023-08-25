@@ -31,6 +31,11 @@ mybatis-plus:
   # 可以使得控制台输出的信息更加清爽一点，把显示的图形等等给删除，即不显示
   global-config:
     banner: false
+    # 配置主键生成策略
+    db-config:
+      id-type: assign_id
+#      # 设置表的前缀，建议以后命名表都采用tb_表明进行命名
+#      table-prefix: tb_
 ## Mybatis的日志记录开关及其驼峰命名开关
 #mybatis:
 #  configuration:

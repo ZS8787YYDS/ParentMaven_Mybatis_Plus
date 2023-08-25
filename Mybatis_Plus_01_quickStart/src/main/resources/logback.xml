@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!--这个标签可以设置控制台输出的日志，可以使得日志变得更轻便一些-->
-<configuration>
-    <logger name="com.github.pagehelper" level="OFF"/>
-</configuration>

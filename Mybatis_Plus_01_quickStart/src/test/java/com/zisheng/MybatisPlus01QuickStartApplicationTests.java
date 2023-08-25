@@ -65,7 +65,7 @@ class MybatisPlus01QuickStartApplicationTests {
 //        List<User> users = demoMapper.selectList(null);
 //
 //        users.forEach(System.out::println);
-        User user = new User(1,"撒", (byte) 1, (short) 12);
+        User user = new User(1L,"撒", (byte) 1, (short) 12);
         System.out.println(demoMapper.updateById(user));
     }
 
@@ -219,9 +219,10 @@ class MybatisPlus01QuickStartApplicationTests {
     {
 //        int ans = testMapper.insert(new User(5, "张无忌", (byte) 2, (short) 22));
         User user = new User();
-        user.setName("周芷若");
+//        user.setId(1121);
+        user.setName("母叉");
         user.setGender((byte) 2);
-        user.setAge((short) 18);
+        user.setAge((short) 62);
         int ans = testMapper.insert(user);
         log.info("返回的结果为：{}",ans);
     }
