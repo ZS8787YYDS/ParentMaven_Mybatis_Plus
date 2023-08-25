@@ -138,9 +138,9 @@ class MybatisPlus01QuickStartApplicationTests {
         log.info("每页显示的数据个数：{}",size);
         List results = page.getRecords();
         log.info("查询的信息如下：");
-        System.out.println("-------------------------------------------------------");
-        results.forEach(System.out::println);
-        System.out.println("-------------------------------------------------------");
+        log.info("-------------------------------------------------------");
+        results.forEach(o -> log.info("" + o));
+        log.info("-------------------------------------------------------");
         long totalPages = page.getPages();
         log.info("一共{}页",totalPages);
         Long total = page.getTotal();
