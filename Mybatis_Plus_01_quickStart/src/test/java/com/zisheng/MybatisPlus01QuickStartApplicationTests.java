@@ -21,7 +21,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -58,16 +61,16 @@ class MybatisPlus01QuickStartApplicationTests {
     /**
      * 根据ID更新功能测试代码
      */
-    @Test
-    public void testUpdateById()
-    {
-//        List<User> users = testMapper.selectList(null);
-//        List<User> users = demoMapper.selectList(null);
-//
-//        users.forEach(System.out::println);
-        User user = new User(1L,"撒", (byte) 1, (short) 12);
-        System.out.println(demoMapper.updateById(user));
-    }
+//    @Test
+//    public void testUpdateById()
+//    {
+////        List<User> users = testMapper.selectList(null);
+////        List<User> users = demoMapper.selectList(null);
+////
+////        users.forEach(System.out::println);
+//        User user = new User(1L,"撒", (byte) 1, (short) 12);
+//        System.out.println(demoMapper.updateById(user));
+//    }
 
     /**
      * 根据ID查询功能测试代码
@@ -288,5 +291,46 @@ class MybatisPlus01QuickStartApplicationTests {
         log.info("总页数：{}",pages);
         long total = page.getTotal();
         log.info("表中数据的总数为：{}",total);
+    }
+    @Test
+    public void testMultiRecords()
+    {
+        /*根据多个id进行查询*/
+//        List<Long> ids = new ArrayList<>();
+//        Collections.addAll(ids,1695120152927510529L,1695123391123152898L,1695128424866701313L);
+//        List<User> users = testMapper.selectBatchIds(ids);
+//        users.forEach(System.out::println);
+        /*根据多个id进行删除*/
+        List<Long> ids = new ArrayList<>();
+        Collections.addAll(ids,1087946753L);
+        testMapper.deleteBatchIds(ids);
+        log.info("根据多个id删除数据成功");
+    }
+    @Test
+    public void testUpdate()
+    {
+        /*乐观锁的实现的第一种方式： 自己设置乐观锁version的值,保证执行更新操作的时候version必须有值即可*/
+/*        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        User user = new User();
+        user.setName("小子");
+        user.setAge((short) 80);
+        user.setGender((byte) 1);
+        // 必须要设置version的值，设置之后乐观所机制才会生效。也可以不设置id的值，可以采用第二种方法
+        user.setVersion(3);
+        lambdaQueryWrapper.eq(user.getAge() != null,User::getAge,user.getAge());
+        int update = testMapper.update(user, lambdaQueryWrapper);
+        log.info("" + update);*/
+        /*乐观锁实现的第二种方式： 先把数据查询出来，再进行更新就可以了，因为查询出的数据就有version的值
+        * 总之就是要保证更新的时候version必须有值
+        * */
+//        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+//        HandleNull handleNull = new HandleNull();
+//        handleNull.setAgeUp((short) 80);
+//        handleNull.setAge((short) 80);
+//        lambdaQueryWrapper.between(handleNull.getAgeUp() != null && handleNull.getAge() != null,
+//                User::getAge,handleNull.getAge(),handleNull.getAgeUp());
+//        User user = testMapper.selectOne(lambdaQueryWrapper);
+//        user.setName("小王八蛋");
+//        testMapper.update(user,lambdaQueryWrapper);
     }
 }

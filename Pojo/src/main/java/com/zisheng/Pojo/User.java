@@ -1,9 +1,6 @@
 package com.zisheng.Pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,9 +34,15 @@ public class User {
      * 通过select属性可以设置当前这个属性是否参与查询，true表示参与，false表示不参与
      * 通过exist属性可以设置当前这个属性在数据库表当中是否存在，false表示不存在，true表示存在
      */
-    @TableField(value = "gender",select = false)
+    @TableField(value = "gender",select = false) // 指定当前属性对应于数据库表中gender这一字段，并且这个属性不参与查询操作
     private Byte gender;
     private Short age;
-//    @TableField(exist = false)
-//    private Integer score;
+    @TableField(exist = false) // 将exist设置为false，表示这个属性在数据库表中是不存在的
+    private Integer score;
+//    // 添加逻辑删除属性,通过@TableLogic注解设置删除状态以及未删除状态下默认值.
+    //   也可以在配置文件中进行配置
+//    @TableLogic(value = "0",delval = "1")
+    private Byte deleteState;
+    @Version // 表示该属性为乐观锁，一般情况下命名为version
+    private Long version;
 }

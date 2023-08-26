@@ -21,19 +21,24 @@ spring:
   # 关闭控制台输出的图形等等日志，
   main:
     banner-mode: off
-# MybatisPlus的日志记录开关
 mybatis-plus:
   configuration:
     # Mybatis_plus的日志记录开关
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # mybatis_plus的驼峰命名开关
     map-underscore-to-camel-case: true
-  # 可以使得控制台输出的信息更加清爽一点，把显示的图形等等给删除，即不显示
   global-config:
+    # 可以使得控制台输出的信息更加清爽一点，把显示的图形等等给删除，即不显示
     banner: false
-    # 配置主键生成策略
     db-config:
+      # 配置主键生成策略
       id-type: assign_id
+      # 设置逻辑删除属性
+      logic-delete-field: deleteState
+      # 设置删除状态下默认的值
+      logic-delete-value: 1
+      # 设置未删除状态下默认的值
+      logic-not-delete-value: 0
 #      # 设置表的前缀，建议以后命名表都采用tb_表明进行命名
 #      table-prefix: tb_
 ## Mybatis的日志记录开关及其驼峰命名开关

@@ -1,6 +1,7 @@
 package com.zisheng.Configuration;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,8 @@ public class MPConfiguration {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
         // 调用addInnerInterceptor方法添加内部拦截器,要想实现分页操作，要添加分页拦截器
         mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        // 添加乐观锁拦截器
+        mybatisPlusInterceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
         return mybatisPlusInterceptor;
     }
 }
