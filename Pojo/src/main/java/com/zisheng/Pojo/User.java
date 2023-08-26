@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
  * 指定该实体类所对应数据库中的表,这个实体类会作为泛型的数据类型传递给BaseMapper接口
  * 使得BaseMapper接口中的方法会去操作该实体类所对应的表
  */
-@TableName("user_table")
+//@TableName("tb_user")
 public class User {
     /*设置主键生成策略*/
     /**
@@ -29,7 +29,7 @@ public class User {
 //    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
     private String name;
-    /**user_table
+    /**
      * 通过TableField注解的value属性可以设置实体类的属性对应表中的哪个字段
      * 通过select属性可以设置当前这个属性是否参与查询，true表示参与，false表示不参与
      * 通过exist属性可以设置当前这个属性在数据库表当中是否存在，false表示不存在，true表示存在

@@ -39,8 +39,8 @@ mybatis-plus:
       logic-delete-value: 1
       # 设置未删除状态下默认的值
       logic-not-delete-value: 0
-#      # 设置表的前缀，建议以后命名表都采用tb_表明进行命名
-#      table-prefix: tb_
+      # 设置表的前缀，建议以后命名表都采用tb_表明进行命名
+      table-prefix: tb_
 ## Mybatis的日志记录开关及其驼峰命名开关
 #mybatis:
 #  configuration:

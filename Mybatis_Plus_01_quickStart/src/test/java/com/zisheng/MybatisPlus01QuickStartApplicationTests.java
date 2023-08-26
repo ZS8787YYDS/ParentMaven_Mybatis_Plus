@@ -77,7 +77,7 @@ class MybatisPlus01QuickStartApplicationTests {
      */
     @Test
     public void testSelectById() {
-        User user = testMapper.selectById(1);
+        User user = testMapper.selectById(2);
         System.out.println(user);
     }
 
@@ -207,12 +207,12 @@ class MybatisPlus01QuickStartApplicationTests {
     /**
      * 查询所有表中元素个数代码
      */
-    @Test
-    public void testSelectCount()
-    {
-        Long count = testMapper.selectCount(null);
-        log.info("表中的数据个数：{}",count);
-    }
+//    @Test
+//    public void testSelectCount()
+//    {
+//        Long count = testMapper.selectCount(null);
+//        log.info("表中的数据个数：{}",count);
+//    }
 
     /**
      * 插入功能测试代码
@@ -224,8 +224,8 @@ class MybatisPlus01QuickStartApplicationTests {
         User user = new User();
 //        user.setId(1121);
         user.setName("母叉");
-        user.setGender((byte) 2);
-        user.setAge((short) 62);
+        user.setGender( 2);
+        user.setAge( 62);
         int ans = testMapper.insert(user);
         log.info("返回的结果为：{}",ans);
     }
@@ -236,7 +236,7 @@ class MybatisPlus01QuickStartApplicationTests {
     @Test
     public void testDeleteById()
     {
-        int n = testMapper.deleteById(7);
+        int n = testMapper.deleteById(6);
         log.info("n:[}",n);
     }
     /**
@@ -302,7 +302,7 @@ class MybatisPlus01QuickStartApplicationTests {
 //        users.forEach(System.out::println);
         /*根据多个id进行删除*/
         List<Long> ids = new ArrayList<>();
-        Collections.addAll(ids,1087946753L);
+        Collections.addAll(ids,1695128958684205058L);
         testMapper.deleteBatchIds(ids);
         log.info("根据多个id删除数据成功");
     }
